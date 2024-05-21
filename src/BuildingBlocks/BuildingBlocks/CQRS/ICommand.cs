@@ -6,7 +6,7 @@ namespace BuildingBlocks.CQRS
     {
     }
 
-    public interface ICommand<out IResponse> : IRequest<IResponse>
+    public interface ICommand<out TResponse> : IRequest<TResponse>
     {
     }
 }
