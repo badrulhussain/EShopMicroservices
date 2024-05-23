@@ -1,18 +1,18 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Http.HttpResults;
+﻿using BuildingBlocks.CQRS;
+using MediatR;
 
 namespace Catalog.API.Products.CreateProduct
 {
 
     public record CreateProductCommand(string Name, List<string> Catagory, string Description, string ImageFime, decimal Price)
-        : IRequest<CreateProductResult>;
+        : ICommand<CreateProductResult>;
     public record CreateProductResult(Guid Id);
 
-    internal class CreateProductCommandHandler : IRequestHandler<CreateProductResult, CreateProductResult>
+    internal class CreateProductCommandHandler 
+        : ICommandHandler<CreateProductCommand, CreateProductResult>
     {
-        public Task<CreateProductResult> Handle(CreateProductResult request, CancellationToken cancellationToken)
+        public Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
         {
-            // Business logic to create product
             throw new NotImplementedException();
         }
     }
