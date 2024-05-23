@@ -8,7 +8,12 @@ namespace Catalog.API.Products.CreateProduct
         : IRequest<CreateProductResult>;
     public record CreateProductResult(Guid Id);
 
-    internal class CreateProductHandler
+    internal class CreateProductCommandHandler : IRequestHandler<CreateProductResult, CreateProductResult>
     {
+        public Task<CreateProductResult> Handle(CreateProductResult request, CancellationToken cancellationToken)
+        {
+            // Business logic to create product
+            throw new NotImplementedException();
+        }
     }
 }
