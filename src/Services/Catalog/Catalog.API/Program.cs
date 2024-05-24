@@ -1,10 +1,15 @@
 var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
 
 // Add services to container
+builder.Services.AddCarter();
+builder.Services.AddMediatR(config => 
+{
+    config.RegisterServicesFromAssembly(typeof(Program).Assembly);
+});
 
-app.MapGet("/", () => "Hello World!");
+var app = builder.Build();
 
 // Configure https request pipeline
+app.MapCarter();
 
 app.Run();
