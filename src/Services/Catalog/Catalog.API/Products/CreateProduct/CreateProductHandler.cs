@@ -5,7 +5,7 @@ using MediatR;
 namespace Catalog.API.Products.CreateProduct
 {
 
-    public record CreateProductCommand(string Name, List<string> Catagory, string Description, string ImageFime, decimal Price)
+    public record CreateProductCommand(string Name, List<string> Catagory, string Description, string ImageFile, decimal Price)
         : ICommand<CreateProductResult>;
     public record CreateProductResult(Guid Id);
 
@@ -23,7 +23,7 @@ namespace Catalog.API.Products.CreateProduct
                 Name = command.Name,
                 Catagory = command.Catagory,
                 Description = command.Description,
-                ImageFime = command.ImageFime,
+                ImageFile = command.ImageFile,
                 Price = command.Price
 
 
