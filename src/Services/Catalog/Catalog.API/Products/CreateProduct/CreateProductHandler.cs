@@ -21,15 +21,13 @@
                 Description = command.Description,
                 ImageFile = command.ImageFile,
                 Price = command.Price
-
-
             };
 
-            // Todo
             // Save to databse
             session.Store(product);
             await session.SaveChangesAsync();
 
+            // Returns result
             return new CreateProductResult(product.Id);
         }
     }
