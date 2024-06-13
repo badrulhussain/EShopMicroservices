@@ -8,7 +8,7 @@
         public void AddRoutes(IEndpointRouteBuilder app)
         {
             app.MapPost("products/", 
-                async (CreateProductCommand request, ISender send) =>
+                async (CreateProductRequest request, ISender send) =>
                 {
                     var command = request.Adapt<CreateProductCommand>();
 
