@@ -6,7 +6,7 @@ namespace Catalog.API.Products.GetProductByCategory
     public record GetProductByCategoryResponse(IEnumerable<Product> Products);
 
 
-    internal class GetProductByCategoryEndpoint() : ICarterModule
+    public class GetProductByCategoryEndpoint() : ICarterModule
     {
         public void AddRoutes(IEndpointRouteBuilder app)
         {
