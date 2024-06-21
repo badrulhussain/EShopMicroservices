@@ -20,7 +20,7 @@ namespace Catalog.API.Products.UpdateProduct
                 throw new ProductNotFoundException();
 
             product.Name = command.Name;
-            product.Catagory = command.Category;
+            product.Category = command.Category;
             product.Description = command.Description;
             product.ImageFile = command.ImageFile;
             product.Price = command.Price;

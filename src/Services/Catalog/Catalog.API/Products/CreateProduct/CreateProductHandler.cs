@@ -3,7 +3,7 @@
 namespace Catalog.API.Products.CreateProduct
 {
 
-    public record CreateProductCommand(string Name, List<string> Catagory, string Description, string ImageFile, decimal Price)
+    public record CreateProductCommand(string Name, List<string> Category, string Description, string ImageFile, decimal Price)
         : ICommand<CreateProductResult>;
     public record CreateProductResult(Guid Id);
 
@@ -12,7 +12,7 @@ namespace Catalog.API.Products.CreateProduct
         public CreateProductCommandValidator()
         {
             RuleFor(x => x.Name).NotEmpty().WithMessage("Name is required");
-            RuleFor(x => x.Catagory).NotEmpty().WithMessage("Catagory is required");
+            RuleFor(x => x.Category).NotEmpty().WithMessage("Category is required");
             RuleFor(x => x.Description).NotEmpty().WithMessage("Description is required");
             RuleFor(x => x.ImageFile).NotEmpty().WithMessage("ImageFile is required");
             RuleFor(x => x.Price).GreaterThan(0).WithMessage("Price is required");
@@ -41,7 +41,7 @@ namespace Catalog.API.Products.CreateProduct
             var product = new Product()
             {
                 Name = command.Name,
-                Catagory = command.Catagory,
+                Category = command.Category,
                 Description = command.Description,
                 ImageFile = command.ImageFile,
                 Price = command.Price

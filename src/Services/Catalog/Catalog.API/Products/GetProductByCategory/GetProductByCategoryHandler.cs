@@ -13,7 +13,7 @@ namespace Catalog.API.Products.GetProductByCategory
             logger.LogInformation("GetProductByCategoryQueryHandler.Handle called with (@Query)", query);
 
             var products = await session.Query<Product>()
-                .Where( p => p.Catagory.Contains(query.Category))
+                .Where( p => p.Category.Contains(query.Category))
                 .ToListAsync(cancellationToken);
 
             return new GetProductByCategoryResult(products);
