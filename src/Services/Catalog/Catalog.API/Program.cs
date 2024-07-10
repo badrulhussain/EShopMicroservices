@@ -1,5 +1,7 @@
 using BuildingBlocks.Behaviors;
 using FluentValidation;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,5 +25,31 @@ var app = builder.Build();
 
 // Configure https request pipeline
 app.MapCarter();
+
+app.UseExceptionHandler(exceptionHandlerApp => {
+    exceptionHandlerApp.Run(async context =>
+    {
+        var exeception = context.Features.Get<IExceptionHandlerFeature>()?.Error;
+        if(exeception == null)
+        {
+            return;
+        }
+
+        var problemDetail = new ProblemDetails
+        {
+            Title = exeception.Message,
+            Status =  StatusCodes.Status500InternalServerError,
+            Detail = exeception.StackTrace
+        };
+
+        var logger = context.RequestServices.GetRequiredService<ILogger<Program>>();
+        logger.LogError(exeception, exeception.Message);
+
+        context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+        context.Response.ContentType = "application/json";
+
+        await context.Response.WriteAsJsonAsync(problemDetail);
+    });
+});
 
 app.Run();
